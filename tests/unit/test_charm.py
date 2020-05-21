@@ -12,10 +12,10 @@ class Test${class}(unittest.TestCase):
         harness.begin()
         self.assertFalse(harness.charm.state.installed)
 
-    # def test_install(self):
-    #     """Test emitting an install hook."""
-    #     self.emit("install")
-    #     self.assertEqual(self.charm.state.installed, True)
+    def test_install(self):
+        """Test emitting an install hook."""
+        harness.charm.on.install.emit()
+        self.assertEqual(self.charm.state.installed, True)
 
 
 if __name__ == "__main__":
