@@ -1,10 +1,11 @@
 import unittest
 
 import setuppath  # noqa:F401
+from charm import ${class}
 from ops.testing import Harness
 
 
-class TestCharm(unittest.TestCase):
+class Test${class}(unittest.TestCase):
     def test_harness(self):
         """Verify harness."""
         harness = Harness(${class})
