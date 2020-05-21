@@ -17,10 +17,44 @@ class Test${class}(unittest.TestCase):
         self.assertFalse(self.harness.charm.state.installed)
 
     def test_install(self):
-        """Test emitting an install hook."""
+        """Test response to an install event."""
         self.harness.begin()
         self.harness.charm.on.install.emit()
-        self.assertEqual(self.harness.charm.state.installed, True)
+        self.assertTrue(self.harness.charm.state.installed)
+
+    def test_config_changed_not_installed(self):
+        """Test response to config changed event without install state."""
+        self.harness.begin()
+        self.harness.charm.on.config_changed.emit()
+        self.assertFalse(self.harness.charm.state.configured)
+
+    def test_config_changed(self):
+        """Test response to config changed event."""
+        self.harness.begin()
+        self.harness.charm.state.installed = True
+        self.harness.charm.on.config_changed.emit()
+        self.assertTrue(self.harness.charm.state.configured)
+
+    def test_start_not_installed(self):
+        """Test response to start event without install state."""
+        self.harness.begin()
+        self.harness.charm.on.start.emit()
+        self.assertFalse(self.harness.charm.state.started)
+
+    def test_start_not_configured(self):
+        """Test response to start event without configured state."""
+        self.harness.begin()
+        self.harness.charm.state.installed = True
+        self.harness.charm.on.start.emit()
+        self.assertFalse(self.harness.charm.state.started)
+
+    def test_start(self):
+        """Test response to start event."""
+        self.harness.begin()
+        self.harness.charm.state.installed = True
+        self.harness.charm.state.configured = True
+        self.harness.charm.on.start.emit()
+        self.assertTrue(self.harness.charm.state.started)
 
 
 if __name__ == "__main__":
