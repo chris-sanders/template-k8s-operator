@@ -1,0 +1,28 @@
+name: ${metadata.package}
+summary: Describe your charm here
+maintainers:
+    - ${dev_name} <${dev_email}>
+description: |
+    A nice long description of what the product does and any
+    high level information about how the charm provides the product,
+    on which platform, etc.
+tags:
+    - misc
+series:
+    - kubernetes
+resources:
+  image:
+    type: oci-image
+    description: "Image to deploy."
+# -- example storage
+#storage:
+#  database:
+#    type: filesystem
+#    location: /var/lib/mysql 
+# -- example relations
+#requires:
+#    db:
+#        interface: mysql
+#provides:
+#    website:
+#        interface: http
