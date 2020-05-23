@@ -35,7 +35,7 @@ class ${class}(CharmBase):
         self.state.set_default(configured=False)
         self.state.set_default(started=False)
         # -- Setup Jinja --
-        loader = FileSytsemLoader(self.charm_dir / 'templates')
+        loader = FileSystemLoader(self.charm_dir / 'templates')
         self.jinja_environemnt = Environment(loader=loader)
 
     # Starting in juju 2.8
