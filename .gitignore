@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Installed dependencies
+env/*
+
 # Log files
 *.log
 
@@ -20,7 +23,7 @@ repo-info
 
 # reports
 report/*
-htmlcov/
+htmlcov/*
 
 # Test folders
-resources/
+resources/*
