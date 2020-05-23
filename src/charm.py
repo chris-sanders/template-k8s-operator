@@ -35,13 +35,13 @@ class ${class}(CharmBase):
         self.state.set_default(started=False)
 
     # Starting in juju 2.8
-    # def on_install(self, event):
-    #     """Handle install state."""
-    #     self.unit.status = MaintenanceStatus("Installing charm software")
-    #     # Perform install tasks
-    #     self.unit.status = MaintenanceStatus("Install complete")
-    #     logging.info("Install of software complete")
-    #     self.state.installed = True
+    def on_install(self, event):
+        """Handle install state."""
+        self.unit.status = MaintenanceStatus("Installing charm software")
+        # Perform install tasks
+        self.unit.status = MaintenanceStatus("Install complete")
+        logging.info("Install of software complete")
+        self.state.installed = True
 
     def on_config_changed(self, event):
         """Handle config changed."""
