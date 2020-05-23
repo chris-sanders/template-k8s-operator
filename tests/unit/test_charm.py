@@ -22,14 +22,16 @@ class Test${class}(unittest.TestCase):
         self.harness.charm.on.install.emit()
         self.assertTrue(self.harness.charm.state.installed)
 
-    def test_config_changed_not_installed(self):
-        """Test response to config changed event without install state."""
-        self.harness.begin()
-        self.harness.charm.on.config_changed.emit()
-        self.assertFalse(self.harness.charm.state.configured)
+    # This pattern can't work before juju 2.8
+    # def test_config_changed_not_installed(self):
+    #     """Test response to config changed event without install state."""
+    #     self.harness.begin()
+    #     self.harness.charm.on.config_changed.emit()
+    #     self.assertFalse(self.harness.charm.state.configured)
 
     def test_config_changed(self):
         """Test response to config changed event."""
+        self.harness.set_leader(True)
         self.harness.begin()
         self.harness.charm.state.installed = True
         self.harness.charm.on.config_changed.emit()

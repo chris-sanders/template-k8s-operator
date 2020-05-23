@@ -46,8 +46,11 @@ class ${class}(CharmBase):
     def on_config_changed(self, event):
         """Handle config changed."""
 
-        image = OCIImageResource("image")
+        image = OCIImageResource(self, "image")
         image_info = image.fetch()
+
+        pod_spec = ''
+        self.model.pod.set_spec(pod_spec)
 
         # if not self.state.installed:
         #     logging.warning("Config changed called before install complete, deferring event: {}.".format(event.handle))
