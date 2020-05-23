@@ -10,6 +10,7 @@
 import logging
 
 import setuppath  # noqa:F401
+from jinja2 import Environment, FileSystemLoader
 from oci.oci_image import OCIImageResource
 from ops.charm import CharmBase
 from ops.framework import StoredState
@@ -33,6 +34,9 @@ class ${class}(CharmBase):
         self.state.set_default(installed=False)
         self.state.set_default(configured=False)
         self.state.set_default(started=False)
+        # -- Setup Jinja --
+        loader = FileSytsemLoader(self.charm_dir / 'templates')
+        self.jinja_environemnt = Environment(loader=loader)
 
     # Starting in juju 2.8
     def on_install(self, event):
@@ -46,10 +50,12 @@ class ${class}(CharmBase):
     def on_config_changed(self, event):
         """Handle config changed."""
 
-        image = OCIImageResource(self, "image")
-        image_info = image.fetch()
+        # image = OCIImageResource(self, "image")
+        # image_info = image.fetch()
 
-        pod_spec = ''
+        template = self.jinja_environemnt.get_template('pod_spec.yaml')
+        ctx = {}
+        pod_spec = template.render(ctx)
         self.model.pod.set_spec(pod_spec)
 
         # if not self.state.installed:
