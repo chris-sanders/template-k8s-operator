@@ -50,8 +50,8 @@ class ${class}(CharmBase):
     def on_config_changed(self, event):
         """Handle config changed."""
 
-        # image = OCIImageResource(self, "image")
-        # image_info = image.fetch()
+        image = OCIImageResource(self, "image")
+        image_info = image.fetch()
 
         template = self.jinja_environemnt.get_template('pod_spec.yaml')
         ctx = {}
