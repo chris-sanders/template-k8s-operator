@@ -1,0 +1,7 @@
+containers:
+  - name: busybox-example
+    image: busybox/latest
+    imagePullPolicy: Always
+    command:
+	- sleep
+	- 3600
