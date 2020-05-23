@@ -10,6 +10,7 @@
 import logging
 
 import setuppath  # noqa:F401
+from oci.oci_image import OCIImageResource
 from ops.charm import CharmBase
 from ops.framework import StoredState
 from ops.main import main
@@ -26,35 +27,39 @@ class ${class}(CharmBase):
         super().__init__(*args)
         # -- standard hook observation
         self.framework.observe(self.on.install, self.on_install)
-        self.framework.observe(self.on.start, self.on_start)
         self.framework.observe(self.on.config_changed, self.on_config_changed)
+        self.framework.observe(self.on.start, self.on_start)
         # -- initialize states --
         self.state.set_default(installed=False)
         self.state.set_default(configured=False)
         self.state.set_default(started=False)
 
-    def on_install(self, event):
-        """Handle install state."""
-        self.unit.status = MaintenanceStatus("Installing charm software")
-        # Perform install tasks
-        self.unit.status = MaintenanceStatus("Install complete")
-        logging.info("Install of software complete")
-        self.state.installed = True
+    # Starting in juju 2.8
+    # def on_install(self, event):
+    #     """Handle install state."""
+    #     self.unit.status = MaintenanceStatus("Installing charm software")
+    #     # Perform install tasks
+    #     self.unit.status = MaintenanceStatus("Install complete")
+    #     logging.info("Install of software complete")
+    #     self.state.installed = True
 
     def on_config_changed(self, event):
         """Handle config changed."""
 
-        if not self.state.installed:
-            logging.warning("Config changed called before install complete, deferring event: {}.".format(event.handle))
-            self._defer_once(event)
+        image = OCIImageResource("image")
+        image_info = image.fetch()
 
-            return
+        # if not self.state.installed:
+        #     logging.warning("Config changed called before install complete, deferring event: {}.".format(event.handle))
+        #     self._defer_once(event)
 
-        if self.state.started:
-            # Stop if necessary for reconfig
-            logging.info("Stopping for configuration, event handle: {}".format(event.handle))
-        # Configure the software
-        logging.info("Configuring")
+        #     return
+
+        # if self.state.started:
+        #     # Stop if necessary for reconfig
+        #     logging.info("Stopping for configuration, event handle: {}".format(event.handle))
+        # # Configure the software
+        # logging.info("Configuring")
         self.state.configured = True
 
     def on_start(self, event):
