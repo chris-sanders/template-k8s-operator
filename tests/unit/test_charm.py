@@ -1,11 +1,13 @@
+"""Charm unit tests"""
 import unittest
 
-import setuppath  # noqa:F401
+import setuppath  # noqa:F401,I100
 from charm import ${class}
 from ops.testing import Harness
 
 
 class Test${class}(unittest.TestCase):
+    """Charm test class."""
 
     def setUp(self):
         """Setup tests."""

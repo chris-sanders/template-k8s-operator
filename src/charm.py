@@ -8,9 +8,9 @@
 """Operator Charm main library."""
 # Load modules from lib directory
 import logging
-import yaml
 
-import setuppath  # noqa:F401
+import setuppath  # noqa:F401,I102
+import yaml
 from jinja2 import Environment, FileSystemLoader
 from oci.oci_image import OCIImageResource
 from ops.charm import CharmBase
@@ -50,7 +50,6 @@ class ${class}(CharmBase):
 
     def on_config_changed(self, event):
         """Handle config changed."""
-
         image = OCIImageResource(self, "image")
         image_info = image.fetch()
 
@@ -64,17 +63,6 @@ class ${class}(CharmBase):
         logging.debug(f"Using pod_spec: {pod_spec}")
         self.model.pod.set_spec(pod_spec)
 
-        # if not self.state.installed:
-        #     logging.warning("Config changed called before install complete, deferring event: {}.".format(event.handle))
-        #     self._defer_once(event)
-
-        #     return
-
-        # if self.state.started:
-        #     # Stop if necessary for reconfig
-        #     logging.info("Stopping for configuration, event handle: {}".format(event.handle))
-        # # Configure the software
-        # logging.info("Configuring")
         self.state.configured = True
 
     def on_start(self, event):
