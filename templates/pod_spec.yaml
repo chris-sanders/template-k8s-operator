@@ -6,7 +6,7 @@ containers:
       password: {{ repo_password }}
     ports:
         - containerPort: 80
-          protocol: http
+          protocol: TCP
 # containers:
 #   - name: busybox-example
 #     image: busybox/latest
