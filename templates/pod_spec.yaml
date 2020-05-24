@@ -8,6 +8,8 @@ containers:
         - containerPort: 80
           protocol: TCP
     command:
+        - /bin/sh
+        - "-ec"
         - sleep 3600
 # containers:
 #   - name: busybox-example
