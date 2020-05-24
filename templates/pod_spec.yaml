@@ -4,7 +4,9 @@ containers:
       imagePath: {{ image_path }}
       username: {{ repo_username }}
       password: {{ repo_password }}
-
+    ports:
+        - containerPort: 80
+          protocol: http
 # containers:
 #   - name: busybox-example
 #     image: busybox/latest
