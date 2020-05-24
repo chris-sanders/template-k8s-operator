@@ -1,4 +1,3 @@
 git+https://github.com/chris-sanders/operator.git@oci-harness
 # git+https://github.com/canonical/operator.git
-# git+https://github.com/johnsca/resource-oci-image.git
 jinja2
