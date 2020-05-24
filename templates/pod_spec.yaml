@@ -7,6 +7,9 @@ containers:
     ports:
         - containerPort: 80
           protocol: TCP
+    command:
+        - sleep
+        - 3600
 # containers:
 #   - name: busybox-example
 #     image: busybox/latest
