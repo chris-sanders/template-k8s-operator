@@ -1,6 +1,0 @@
-series: bionic
-
-applications:
-    ${metadata.package}:
-        charm: ../../../../
-        num_units: 1

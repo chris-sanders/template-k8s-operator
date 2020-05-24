@@ -1,0 +1,7 @@
+bundle: kubernetes
+applications:
+    busybox:
+        charm: ../../../../
+        scale: 1
+        resources:
+            image: busybox/latest

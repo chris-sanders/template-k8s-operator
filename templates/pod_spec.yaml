@@ -1,7 +1,14 @@
 containers:
-  - name: busybox-example
-    image: busybox/latest
-    imagePullPolicy: Always
-    command:
-	- sleep
-	- 3600
+  - name: busybox
+    imageDetails:
+      imagePath: {{ image_path }}
+      username: {{ repo_username }}
+      password: {{ repo_password }}
+
+# containers:
+#   - name: busybox-example
+#     image: busybox/latest
+#     imagePullPolicy: Always
+#     command:
+#     - sleep
+#     - 3600

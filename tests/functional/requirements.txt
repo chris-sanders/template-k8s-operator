@@ -1,1 +1,2 @@
-git+https://github.com/openstack-charmers/zaza.git#egg=zaza
+# git+https://github.com/openstack-charmers/zaza.git#egg=zaza
+git+file:///home/chris/src/juju/zaza#egg=zaza

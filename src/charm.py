@@ -8,6 +8,7 @@
 """Operator Charm main library."""
 # Load modules from lib directory
 import logging
+import yaml
 
 import setuppath  # noqa:F401
 from jinja2 import Environment, FileSystemLoader
@@ -54,8 +55,13 @@ class ${class}(CharmBase):
         image_info = image.fetch()
 
         template = self.jinja_environemnt.get_template('pod_spec.yaml')
-        ctx = {}
-        pod_spec = template.render(ctx)
+        ctx = {
+          'image_path': image_info.image_path,
+          'repo_username': image_info.username,
+          'repo_password': image_info.password,
+        }
+        pod_spec = yaml.safe_load(template.render(ctx))
+        logging.debug(f"Using pod_spec: {pod_spec}")
         self.model.pod.set_spec(pod_spec)
 
         # if not self.state.installed:
