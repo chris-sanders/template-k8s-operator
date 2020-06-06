@@ -12,7 +12,7 @@ help:
 
 env:
 	@echo "Installing/updating env from requirements.txt"
-	@pip3 install --target=./env -r requirements.txt
+	@pip3 install --target=./env -r requirements.txt --upgrade
 
 submodules:
 	@echo "Cloning submodules"
