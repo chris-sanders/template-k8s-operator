@@ -34,6 +34,7 @@ class Test${class}(unittest.TestCase):
     def test_config_changed(self):
         """Test response to config changed event."""
         self.harness.set_leader(True)
+        self.harness.populate_oci_resources()
         self.harness.begin()
         self.harness.charm.state.installed = True
         self.harness.charm.on.config_changed.emit()
